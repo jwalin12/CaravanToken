@@ -3,11 +3,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 
-
-
-
-
-contract gCarFeeDistributor is ReentrancyGuard{
+contract gCarFeeDistributor is ReentrancyGuard {
 
     address private gCarAddress;
     address private rentPoolFactoryAddress;
@@ -32,13 +28,10 @@ contract gCarFeeDistributor is ReentrancyGuard{
         require(msg.sender == authority, "UNAUTHORIZED");
         cycleBalance = 0;
         uint256 len = sentAddresses.length;
-
         for (uint i = len; i >=0; i--) {
             addressToSentThisCycle[sentAddresses[i]] = false;
             sentAddresses.pop();
         }
-        
-
     }
 
     function setBalanceAtStartOfCycle() external {
