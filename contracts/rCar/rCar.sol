@@ -2,22 +2,20 @@ pragma solidity >= 0.8.0;
 
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Capped.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
 
 
-contract rCAR is ERC20 {
+
+contract rCAR is ERC20Burnable {
 
 
     address private authority;
     mapping(address => bool) isMinter;
 
 
-    constructor(address _authority) public ERC20("Caravan rebate", "rCAR") {
+    constructor(address _authority) public ERC20("Caravan rebate", "rCAR") ERC20Burnable() {
         authority = _authority;
-
-        //TODO: mint initial supply to vesting contracts + airdrop holder + treasury based on distribution
     }
 
 
