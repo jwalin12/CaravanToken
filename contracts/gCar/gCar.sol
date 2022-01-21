@@ -5,9 +5,11 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Capped.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol";
 
+import "./interfaces/IgCar.sol";
 
 
-contract gCAR is ERC20Capped {
+
+contract gCAR is ERC20Capped, IgCar {
 
 
     address private minter;
@@ -19,9 +21,8 @@ contract gCAR is ERC20Capped {
         //TODO: mint initial supply to vesting contracts + airdrop holder + treasury based on distribution
     }
 
-    function mint(address to, uint256 amount) external {
-        require(msg.sender == minter);
-
+    function mint(address to, uint256 amount) external override {
+        require(msg.sender == minter, "unauthorized");
         _mint(to, amount);
 
     }
