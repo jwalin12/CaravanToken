@@ -3,9 +3,9 @@ pragma solidity >= 0.8.0;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "../interfaces/IrCar.sol";
+import "../interfaces/IsrCar.sol";
 
-
-contract srCAR is ERC20Burnable {
+contract srCAR is ERC20Burnable, IsrCar {
 
         address authority;
         address rCarAddress;
@@ -16,13 +16,13 @@ contract srCAR is ERC20Burnable {
         rCarAddress = _rCarAddress;
     }
 
-    function mint(address to, uint256 amount) external {
+    function mint(address to, uint256 amount) external override {
         IrCar(rCarAddress).burnFrom(msg.sender, amount);
         _mint(to, amount);
 
     }
 
-    function withdrawrCar(address to,uint256 amount) external {
+    function withdrawrCar(address to,uint256 amount) external override {
         burnFrom(msg.sender,amount);
         //should have minter role for rCar
         IrCar(rCarAddress).mint(to, amount);
