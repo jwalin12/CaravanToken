@@ -52,7 +52,7 @@ contract rCarStaker {
         stakingRewardsForStaker[staker] += (rCarStakedForAddress[staker]/IERC20(srCarAddress).totalSupply()) * epochRewards;
     }
 
-    function getProportionalStakingRewards(uint256 amount, address staker) private returns (uint256) {
+    function getProportionalStakingRewards(uint256 amount, address staker) private view returns (uint256) {
         return stakingRewardsForStaker[staker]  * (amount/rCarStakedForAddress[staker]);
     }
 
